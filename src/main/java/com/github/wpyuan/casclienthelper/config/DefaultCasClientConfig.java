@@ -21,7 +21,7 @@ import org.jasig.cas.client.util.AbstractCasFilter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class CasConfig {
+public class DefaultCasClientConfig {
 
     private String casServerUrlPrefix;
     private String casServerLoginUrl;
