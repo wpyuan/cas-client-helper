@@ -34,6 +34,10 @@ public class DefaultCasClientConfig {
      */
     private String artifactParameterName = "ticket";
     /**
+     * Constructed service url 是否携带当前服务端口，访问当前服务的代理地址时设置为false
+     */
+    private boolean appendPort = true;
+    /**
      * Sets where response.encodeUrl should be called on service urls when constructed.
      */
     private boolean encodeServiceUrl = true;

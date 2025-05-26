@@ -2,7 +2,7 @@ package com.github.wpyuan.casclienthelper.filter;
 
 import com.github.wpyuan.casclienthelper.config.DefaultCasClientConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.jasig.cas.client.util.CommonUtils;
+import com.github.wpyuan.casclienthelper.utill.CommonUtils;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
 import org.jasig.cas.client.validation.TicketValidationException;
@@ -67,7 +67,7 @@ public abstract class AbstractCasClientAuthenticationFilter extends OncePerReque
         HttpSession session = request.getSession(false);
         Assertion assertion = session != null ? (Assertion) session.getAttribute(CONST_CAS_ASSERTION) : null;
         final String serviceUrl = CommonUtils.constructServiceUrl(request, response, null, this.defaultCasClientConfig.getServerName(),
-                this.defaultCasClientConfig.getArtifactParameterName(), this.defaultCasClientConfig.isEncodeServiceUrl());
+                this.defaultCasClientConfig.getArtifactParameterName(), this.defaultCasClientConfig.isAppendPort(), this.defaultCasClientConfig.isEncodeServiceUrl());
         final String ticket = CommonUtils.safeGetParameter(request, this.defaultCasClientConfig.getArtifactParameterName());
         final boolean wasGatewayed = this.defaultCasClientConfig.isGateway() && this.defaultCasClientConfig.getGatewayStorage().hasGatewayedAlready(request, serviceUrl);
         if (assertion == null && CommonUtils.isBlank(ticket) && !wasGatewayed) {
