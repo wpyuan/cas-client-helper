@@ -134,10 +134,10 @@ public abstract class AbstractCasClientAuthenticationFilter extends OncePerReque
             } catch (final TicketValidationException e) {
                 log.debug(e.getMessage(), e);
 
-                onFailedValidation(request, response);
+                onFailedValidation(request, response, e);
 
                 if (this.defaultCasClientConfig.isExceptionOnValidationFailure()) {
-                    throw new ServletException(e);
+                    throw new ServletException(e.getMessage(), e);
                 }
             }
         }
@@ -182,5 +182,5 @@ public abstract class AbstractCasClientAuthenticationFilter extends OncePerReque
      * @param request  the HttpServletRequest.
      * @param response the HttpServletResponse.
      */
-    public abstract void onFailedValidation(HttpServletRequest request, HttpServletResponse response);
+    public abstract void onFailedValidation(HttpServletRequest request, HttpServletResponse response, TicketValidationException e);
 }
