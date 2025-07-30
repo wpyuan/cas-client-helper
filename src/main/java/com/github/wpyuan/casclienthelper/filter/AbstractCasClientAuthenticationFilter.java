@@ -139,6 +139,7 @@ public abstract class AbstractCasClientAuthenticationFilter extends OncePerReque
                 if (this.defaultCasClientConfig.isExceptionOnValidationFailure()) {
                     throw new ServletException(e.getMessage(), e);
                 }
+                return;
             }
         }
 
