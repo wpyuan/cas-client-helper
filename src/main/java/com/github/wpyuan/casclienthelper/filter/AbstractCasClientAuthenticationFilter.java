@@ -69,7 +69,7 @@ public abstract class AbstractCasClientAuthenticationFilter extends OncePerReque
         final String serviceUrl = CommonUtils.constructServiceUrl(request, response, null, this.defaultCasClientConfig.getServerName(),
                 this.defaultCasClientConfig.getArtifactParameterName(), this.defaultCasClientConfig.isAppendPort(), this.defaultCasClientConfig.isEncodeServiceUrl());
         String ticket = CommonUtils.safeGetParameter(request, this.defaultCasClientConfig.getArtifactParameterName());
-        if (CommonUtils.isNotBlank(ticket) && request.getCookies() == null) {
+        if (CommonUtils.isNotBlank(ticket) && (request.getSession(false) == null || request.getSession(false).isNew())) {
             // cas服务端登录成功后跳转携带的ticket，已经失效了，此时要作废，否则会报错“org.jasig.cas.client.validation.TicketValidationException: 票根'ST-XX'不符合目标服务”
             ticket = null;
         }
